@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Header from './../Stars/Header' 
+import addOperation from "./../action";
+import { connect } from "react-redux";
 import HomeContent from './../Stars/HomeContent'
+
+const mapStateToProps = state => ({
+  items: state.items
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAdd: thins => {
+      dispatch(addOperation(thins));
+    }
+  };
+};
 
 
 class App extends Component {
@@ -15,14 +26,18 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        {/* <Header position="top"></Header> */}
+       <React.Fragment>
+        <Header position="top"></Header> 
         <HomeContent></HomeContent>
-        {/* <Header position="bottom"></Header> */}
+        <Header position="bottom"></Header> 
         </React.Fragment>
+     
         )
         ;
       }
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
